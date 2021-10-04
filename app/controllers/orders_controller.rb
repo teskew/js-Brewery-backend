@@ -11,16 +11,30 @@ class OrdersController < ApplicationController
         render json: order
     end
 
-    def create 
-        
+    def create  
         order = Order.new(order_params)
-      
         if order.save 
             render json: order
         else
             render json: {error: "Couldnt be saved"}
         end
     end
+
+    def update
+        #  byebug
+       order = Order.find_by_id(params[:id])
+        if order.update(order_params)
+            render json: order
+        else
+            render json: {error: "Couldn't Update"}
+        end
+    end
+
+    # def destroy
+    #     comment = Comment.find_by_id(params[:id])
+    #     comment.destroy
+    #     render json: {message: "Successfully deleted #{comment.title}"}
+    # end
 private
 
 def order_params 
