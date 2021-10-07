@@ -1,9 +1,9 @@
 class OrdersController < ApplicationController
     def index
         orders = Order.all
-        render json: orders
-    #    render json: orders.to_json(except: [:created_at, :updated_at], include: {company: {only: [:name]}})
-      #render json: orderSerializer.new(orders, {include: [:company]})
+        #render json: orders
+        render json: OrderSerializer.new(orders)
+      
     end
 
     def show 
@@ -30,11 +30,11 @@ class OrdersController < ApplicationController
         end
     end
 
-    # def destroy
-    #     comment = Comment.find_by_id(params[:id])
-    #     comment.destroy
-    #     render json: {message: "Successfully deleted #{comment.title}"}
-    # end
+    def destroy
+        order = Order.find_by_id(params[:id])
+        order.destroy
+        render json: {message: "Successfully deleted #{order.name}"}
+    end
 private
 
 def order_params 
