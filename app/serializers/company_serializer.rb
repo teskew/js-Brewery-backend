@@ -1,6 +1,5 @@
 class CompanySerializer 
   include FastJsonapi::ObjectSerializer
-  attributes :name, :id
-
+  attributes :name
   has_many :orders
  end

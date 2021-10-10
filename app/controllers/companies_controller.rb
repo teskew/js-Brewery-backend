@@ -5,10 +5,10 @@ class CompaniesController < ApplicationController
      render json: CompanySerializer.new(companies)
   end
   
-  def show 
-    company = Company.find_by_id(params[:id])
-    render json: company
-   end
+  # def show 
+  #   company = Company.find_by_id(params[:id])
+  #   render json: CompanySerializer.new(company)
+  #  end
 
  def create  
     company = Company.new(company_params)

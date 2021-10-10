@@ -8,13 +8,14 @@ class OrdersController < ApplicationController
 
     def show 
         order = Order.find_by_id(params[:id])
-        render json: order
+        render json: OrderSerializer.new(order)
     end
+    
 
     def create  
         order = Order.new(order_params)
         if order.save 
-            render json: order
+            render json: OrderSerializer.new(order)
         else
             render json: {error: "Couldnt be saved"}
         end
@@ -24,7 +25,7 @@ class OrdersController < ApplicationController
         #  byebug
        order = Order.find_by_id(params[:id])
         if order.update(order_params)
-            render json: order
+            render json: OrderSerializer.new(order)
         else
             render json: {error: "Couldn't Update"}
         end
@@ -38,6 +39,6 @@ class OrdersController < ApplicationController
 private
 
 def order_params 
-    params.require(:order).permit(:name, :amount, :price, :company_id)
+    params.require(:order).permit(:name, :amount, :price, :company_id, :company_name)
 end
 end
